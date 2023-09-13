@@ -348,9 +348,11 @@ private extension CLDWidgetViewController {
         if #available(iOS 11.0, *) {
             collectionConstraints.append(topButtonsView!.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0))
         } else {
+#if !os(visionOS)
             collectionConstraints.append(NSLayoutConstraint(item: topButtonsView!,
                                                             attribute: .top   , relatedBy: .equal, toItem: topLayoutGuide,
                                                             attribute: .bottom, multiplier: 1, constant: 0))
+#endif
         }
         collectionConstraints.append(NSLayoutConstraint(item: topButtonsView!,
                                                         attribute: .height        , relatedBy: .equal, toItem: nil,
@@ -388,9 +390,12 @@ private extension CLDWidgetViewController {
         if #available(iOS 11.0, *) {
             containerViewConstraints.append(containerView!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0))
         } else {
+#if !os(visionOS)
             containerViewConstraints.append(NSLayoutConstraint(item: containerView!,
                                                                attribute: .bottom, relatedBy : .equal, toItem: bottomLayoutGuide,
                                                                attribute: .top   , multiplier: 1, constant: 0))
+#endif
+
         }
         NSLayoutConstraint.activate(containerViewConstraints)
     }

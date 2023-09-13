@@ -252,7 +252,11 @@ public class CLDCropOverlayView : UIView
         
         var    padding : CGFloat
         var linesCount : Int
+#if os(visionOS)
+        let thickness  = 1.0
+#else
         let thickness  = 1.0 / UIScreen.main.scale
+#endif
         
         // Grid lines - horizontal
         linesCount = gridLinesHorizontal.count

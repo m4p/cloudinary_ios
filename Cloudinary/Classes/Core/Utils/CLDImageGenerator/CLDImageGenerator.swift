@@ -44,8 +44,12 @@ class CLDImageGenerator: NSObject {
         
         /// Draws an image according to instructions
         final func draw() -> UIImage? {
-            
-            UIGraphicsBeginImageContextWithOptions(instructions.targetSize, false, UIScreen.main.scale)
+#if os(visionOS)
+            let scale = CGFloat(1)
+#else
+            let scale = CGFloat(UIScreen.main.scale)
+#endif
+            UIGraphicsBeginImageContextWithOptions(instructions.targetSize, false, scale)
             
             guard let context = UIGraphicsGetCurrentContext() else { return nil }
             

@@ -70,7 +70,11 @@ import Foundation
     }
 
     private func getiOSVersion() -> String {
+#if os(visionOS)
+        return "1.0"
+#else
         return UIDevice.current.systemVersion
+#endif
     }
 }
 extension String {

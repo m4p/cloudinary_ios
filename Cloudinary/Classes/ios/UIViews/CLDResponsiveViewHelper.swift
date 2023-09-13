@@ -111,8 +111,12 @@ import UIKit
         if let gravity = params.gravity {
             responsiveTransformation.setGravity(gravity)
         }
-        
-        return responsiveTransformation.setDpr(Float(UIScreen.main.scale))
+#if os(visionOS)
+        let scale = Float(1)
+#else
+        let scale = Float(UIScreen.main.scale)
+#endif
+        return responsiveTransformation.setDpr(scale)
     }
     
     fileprivate func getRoundedContentHeight(_ view: UIImageView) -> Int {

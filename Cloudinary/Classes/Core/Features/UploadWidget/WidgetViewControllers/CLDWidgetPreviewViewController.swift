@@ -263,9 +263,13 @@ private extension CLDWidgetPreviewViewController {
         if #available(iOS 11.0, *) {
             bottomConstraint = collectionView!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         } else {
+#if !os(visionOS)
             bottomConstraint = NSLayoutConstraint(item: collectionView!, attribute: .bottom   , relatedBy: .equal, toItem: bottomLayoutGuide, attribute: .top, multiplier: 1, constant: -10)
+#endif
         }
+#if !os(visionOS)
         collectionConstraints.append(bottomConstraint)
+#endif
         collectionConstraints.append(NSLayoutConstraint(item: collectionView!,
                                                         attribute: .height        , relatedBy : .equal, toItem: nil,
                                                         attribute: .notAnAttribute, multiplier: 1, constant: collectionHeight))
@@ -279,9 +283,11 @@ private extension CLDWidgetPreviewViewController {
         if #available(iOS 11.0, *) {
             imageViewConstraints.append(mainImageView!.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0))
         } else {
+#if !os(visionOS)
             imageViewConstraints.append(NSLayoutConstraint(item: mainImageView!,
                                                            attribute: .top   , relatedBy: .equal, toItem: topLayoutGuide,
                                                            attribute: .bottom, multiplier: 1, constant: 0))
+#endif
         }
         NSLayoutConstraint.activate(imageViewConstraints)
         

@@ -71,7 +71,9 @@ class CLDWidgetAssetContainer: NSObject {
     }
     
     private static func createThumbnailForVideo(playerItem: AVPlayerItem?) -> UIImage {
-        
+#if os(visionOS)
+        return UIImage()
+#else
         if let urlAsset = playerItem?.asset as? AVURLAsset {
             
             let url = urlAsset.url
@@ -90,5 +92,6 @@ class CLDWidgetAssetContainer: NSObject {
         else {
             return UIImage()
         }
+#endif
     }
 }

@@ -17,7 +17,11 @@ extension CLDTransformation
      */
     @discardableResult
     open func setDprAuto() -> Self {
+#if os(visionOS)
+        let scale = Float(1)
+#else
         let scale = Float(UIScreen.main.scale)
+#endif
         return setDpr(scale)
     }
 }

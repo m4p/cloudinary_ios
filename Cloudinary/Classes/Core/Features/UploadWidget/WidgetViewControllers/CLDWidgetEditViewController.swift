@@ -60,10 +60,12 @@ internal class CLDWidgetEditViewController: UIViewController {
         self.initialAspectLockState = initialAspectLockState
         
         super.init(nibName: nil, bundle: nil)
-        
+#if os(iOS)
         if #available(iOS 11.0, *) {} else {
             automaticallyAdjustsScrollViewInsets = false
         }
+#endif
+
     }
     
     required init?(coder: NSCoder) {
@@ -300,9 +302,14 @@ private extension CLDWidgetEditViewController {
         if #available(iOS 11.0, *) {
             bottomConstraint = buttonsView!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomButtonsViewPadding)
         } else {
+#if !os(visionOS)
             bottomConstraint = NSLayoutConstraint(item: buttonsView!, attribute: .bottom   , relatedBy: .equal, toItem: bottomLayoutGuide, attribute: .top, multiplier: 1, constant: -bottomButtonsViewPadding)
+#endif
+
         }
+#if !os(visionOS)
         buttonsViewConstraints.append(bottomConstraint)
+#endif
         buttonsViewConstraints.append(NSLayoutConstraint(item: buttonsView!,
                                                          attribute: .height        , relatedBy: .equal, toItem: nil,
                                                          attribute: .notAnAttribute, multiplier: 1, constant: buttonsViewHeight))
