@@ -73,7 +73,7 @@ import Foundation
 #if os(visionOS)
         return "1.0"
 #else
-        return UIDevice.current.systemVersion
+        return "15.0"
 #endif
     }
 }
